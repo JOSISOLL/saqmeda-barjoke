@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saqmeda Bar - Test Page</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: white;
+            min-height: 100vh;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 40px 0;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            color: white;
+            border-radius: 10px;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .status {
+            background: #e8f5e8;
+            border: 1px solid #4caf50;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: center;
+        }
+        
+        .test-section {
+            margin: 30px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #007bff;
+        }
+        
+        .test-section h3 {
+            color: #007bff;
+            margin-bottom: 15px;
+        }
+        
+        .test-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 15px 0;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background: #007bff;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #0056b3;
+        }
+        
+        .btn-success {
+            background: #28a745;
+            color: white;
+        }
+        
+        .btn-success:hover {
+            background: #1e7e34;
+        }
+        
+        .btn-danger {
+            background: #dc3545;
+            color: white;
+        }
+        
+        .btn-danger:hover {
+            background: #c82333;
+        }
+        
+        .content {
+            margin: 20px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .instructions {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .instructions h4 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+        
+        .instructions ul {
+            margin-left: 20px;
+            color: #856404;
+        }
+        
+        .instructions li {
+            margin: 8px 0;
+        }
+        
+        .filler-content {
+            height: 500px;
+            background: linear-gradient(45deg, #f0f0f0, #e0e0e0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 18px;
+            color: #666;
+        }
+        
+        .debug-panel {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #333;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 12px;
+            max-width: 250px;
+            z-index: 1000;
+        }
+        
+        .debug-panel h4 {
+            margin-bottom: 10px;
+            color: #4ecdc4;
+        }
+        
+        .debug-item {
+            margin: 5px 0;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .test-buttons {
+                flex-direction: column;
+            }
+            
+            .debug-panel {
+                position: relative;
+                bottom: auto;
+                right: auto;
+                margin: 20px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Include the joke bar script -->
+    <!-- <script>
+        // Paste the entire exit-intent-jokes.js script here
+        (function() {
+            'use strict';
+            
+            // Configuration
+            const config = {
+                // Joke database - feel free to expand!
+                jokes: [
+                    "Why don't scientists trust atoms? Because they make up everything!",
+                    "I told my wife she was drawing her eyebrows too high. She looked surprised.",
+                    "Why don't eggs tell jokes? They'd crack each other up!",
+                    "I'm reading a book about anti-gravity. It's impossible to put down!",
+                    "Did you hear about the mathematician who's afraid of negative numbers? He'll stop at nothing to avoid them!",
+                    "Why do programmers prefer dark mode? Because light attracts bugs!",
+                    "I used to hate facial hair, but then it grew on me.",
+                    "What do you call a fake noodle? An impasta!",
+                    "Why don't skeletons fight each other? They don't have the guts!",
+                    "What's the best thing about Switzerland? I don't know, but the flag is a big plus!"
+                ],
+                
+                // Timing settings
+                minTimeOnPage: 2000, // Reduced to 2 seconds for testing
+                scrollThreshold: 100,
+                mouseLeaveDelay: 300, // Reduced delay for testing
+                
+                // Visual settings
+                backgroundColor: '#ff6b6b',
+                textColor: '#ffffff',
+                fontSize: '16px',
+                padding: '15px',
+                zIndex: 999999,
+                
+                // Behavior settings
+                showOnce: false, // Allow multiple shows for testing
+                autoHide: true,
+                hideDelay: 8000
+            };
+            
+            // State management
+            let hasShown = false;
+            let pageLoadTime = Date.now();
+            let jokeBar = null;
+            let hideTimeout = null;
+            let showTimeout = null;
+            let lastScrollY = 0;
+            let isVisible = false;
+            
+            // Check if enough time has passed since page load
+            function canShow() {
+                return (Date.now() - pageLoadTime) > config.minTimeOnPage;
+            }
+            
+            // Get random joke
+            function getRandomJoke() {
+                return config.jokes[Math.floor(Math.random() * config.jokes.length)];
+            }
+            
+            // Create joke bar element
+            function createJokeBar() {
+                if (jokeBar) return jokeBar;
+                
+                jokeBar = document.createElement('div');
+                jokeBar.style.cssText = `
+                    position: fixed;
+                    top: -100px;
+                    left: 0;
+                    right: 0;
+                    background: ${config.backgroundColor};
+                    color: ${config.textColor};
+                    font-size: ${config.fontSize};
+                    padding: ${config.padding};
+                    text-align: center;
+                    z-index: ${config.zIndex};
+                    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+                    transition: top 0.3s ease-in-out;
+                    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+                    line-height: 1.4;
+                    cursor: pointer;
+                `;
+                
+                // Add close button
+                const closeBtn = document.createElement('span');
+                closeBtn.innerHTML = '×';
+                closeBtn.style.cssText = `
+                    position: absolute;
+                    right: 15px;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    font-size: 24px;
+                    cursor: pointer;
+                    opacity: 0.8;
+                    transition: opacity 0.2s;
+                `;
+                closeBtn.onmouseover = () => closeBtn.style.opacity = '1';
+                closeBtn.onmouseout = () => closeBtn.style.opacity = '0.8';
+                closeBtn.onclick = (e) => {
+                    e.stopPropagation();
+                    hideJokeBar();
+                };
+                
+                jokeBar.appendChild(closeBtn);
+                
+                // Add joke text
+                const jokeText = document.createElement('div');
+                jokeText.style.marginRight = '40px';
+                jokeText.textContent = getRandomJoke();
+                jokeBar.appendChild(jokeText);
+                
+                // Hide on click
+                jokeBar.onclick = () => hideJokeBar();
+                
+                document.body.appendChild(jokeBar);
+                return jokeBar;
+            }
+            
+            // Show joke bar
+            function showJokeBar() {
+                if (!canShow() || isVisible) return;
+                
+                clearTimeout(showTimeout);
+                clearTimeout(hideTimeout);
+                
+                const bar = createJokeBar();
+                
+                // Animate in
+                requestAnimationFrame(() => {
+                    bar.style.top = '0px';
+                    isVisible = true;
+                });
+                
+                // Mark as shown
+                hasShown = true;
+                
+                // Update debug info
+                updateDebugInfo();
+                
+                // Auto-hide if configured
+                if (config.autoHide) {
+                    hideTimeout = setTimeout(() => {
+                        hideJokeBar();
+                    }, config.hideDelay);
+                }
+            }
+            
+            // Hide joke bar
+            function hideJokeBar() {
+                if (!jokeBar || !isVisible) return;
+                
+                clearTimeout(hideTimeout);
+                clearTimeout(showTimeout);
+                
+                jokeBar.style.top = '-100px';
+                isVisible = false;
+                
+                // Remove from DOM after animation
+                setTimeout(() => {
+                    if (jokeBar && jokeBar.parentNode) {
+                        jokeBar.parentNode.removeChild(jokeBar);
+                        jokeBar = null;
+                    }
+                }, 300);
+                
+                // Reset for testing
+                hasShown = false;
+                updateDebugInfo();
+            }
+            
+            // Desktop exit intent detection
+            function handleMouseLeave(e) {
+                if (e.clientY <= 0 || e.clientX <= 0 || 
+                    e.clientX >= window.innerWidth || e.clientY >= window.innerHeight) {
+                    
+                    if (canShow()) {
+                        showTimeout = setTimeout(() => {
+                            showJokeBar();
+                        }, config.mouseLeaveDelay);
+                    }
+                }
+            }
+            
+            // Cancel show on mouse return
+            function handleMouseEnter() {
+                clearTimeout(showTimeout);
+            }
+            
+            // Fast scroll detection
+            function handleScroll() {
+                const currentScrollY = window.pageYOffset;
+                const scrollDelta = lastScrollY - currentScrollY;
+                
+                // Fast upward scroll near top of page
+                if (scrollDelta > 50 && currentScrollY < config.scrollThreshold) {
+                    if (canShow()) {
+                        showJokeBar();
+                    }
+                }
+                
+                lastScrollY = currentScrollY;
+            }
+            
+            // Mobile-specific: tab blur detection
+            function handleVisibilityChange() {
+                if (document.hidden && canShow()) {
+                    showJokeBar();
+                }
+            }
+            
+            // Update debug information
+            function updateDebugInfo() {
+                const debugPanel = document.getElementById('debug-panel');
+                if (debugPanel) {
+                    const timeOnPage = Math.round((Date.now() - pageLoadTime) / 1000);
+                    debugPanel.innerHTML = `
+                        <h4>🐛 Debug Info</h4>
+                        <div class="debug-item">Time on page: ${timeOnPage}s</div>
+                        <div class="debug-item">Can show: ${canShow() ? '✅' : '❌'}</div>
+                        <div class="debug-item">Has shown: ${hasShown ? '✅' : '❌'}</div>
+                        <div class="debug-item">Currently visible: ${isVisible ? '✅' : '❌'}</div>
+                        <div class="debug-item">Scroll position: ${Math.round(window.pageYOffset)}px</div>
+                    `;
+                }
+            }
+            
+            // Initialize when DOM is ready
+            function init() {
+                // Desktop exit intent
+                document.addEventListener('mouseleave', handleMouseLeave);
+                document.addEventListener('mouseenter', handleMouseEnter);
+                
+                // Scroll detection
+                let scrollTimeout;
+                window.addEventListener('scroll', () => {
+                    clearTimeout(scrollTimeout);
+                    scrollTimeout = setTimeout(() => {
+                        handleScroll();
+                        updateDebugInfo();
+                    }, 50);
+                });
+                
+                // Mobile tab switching
+                document.addEventListener('visibilitychange', handleVisibilityChange);
+                
+                // Update debug info regularly
+                setInterval(updateDebugInfo, 1000);
+                
+                console.log('🃏 Exit Intent Joke Bar initialized!');
+            }
+            
+            // Start when DOM is ready
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', init);
+            } else {
+                init();
+            }
+            
+            // Expose public API for testing
+            window.JokeBar = {
+                show: showJokeBar,
+                hide: hideJokeBar,
+                addJoke: (joke) => config.jokes.push(joke),
+                setJokes: (jokes) => config.jokes = jokes,
+                configure: (options) => Object.assign(config, options),
+                getConfig: () => config,
+                getState: () => ({
+                    hasShown,
+                    isVisible,
+                    canShow: canShow(),
+                    timeOnPage: Date.now() - pageLoadTime
+                })
+            };
+        })();
+    </script> -->
+    <script src="saqmeda.min.js"></script>
+    <div class="container">
+        <div class="header">
+            <h1>🃏 Exit Intent Joke Bar</h1>
+            <p>Test page to demonstrate exit intent detection</p>
+        </div>
+
+        <div class="status">
+            <strong>✅ Script loaded successfully!</strong> Try the triggers below to see the joke bar in action.
+        </div>
+
+        <div class="instructions">
+            <h4>🎯 How to Trigger the Joke Bar:</h4>
+            <ul>
+                <li><strong>Mouse Exit:</strong> Move your mouse to the very top of the browser window (like you're going to close the tab)</li>
+                <li><strong>Fast Scroll:</strong> Scroll down a bit, then quickly scroll back up to the top</li>
+                <li><strong>Tab Switch:</strong> Switch to another tab and come back (mobile/desktop)</li>
+                <li><strong>Keyboard:</strong> Press Ctrl+W (or Cmd+W on Mac) to simulate closing</li>
+                <li><strong>Manual:</strong> Use the test buttons below</li>
+            </ul>
+        </div>
+
+        <div class="test-section">
+            <h3>🧪 Manual Testing</h3>
+            <p>Use these buttons to manually trigger and control the joke bar:</p>
+            <div class="test-buttons">
+                <button class="btn btn-primary" onclick="JokeBar.show()">Show Joke Bar</button>
+                <button class="btn btn-danger" onclick="JokeBar.hide()">Hide Joke Bar</button>
+                <button class="btn btn-success" onclick="console.log(JokeBar.getState())">Log State</button>
+            </div>
+        </div>
+
+        <div class="test-section">
+            <h3>⚙️ Configuration Testing</h3>
+            <p>Test different configurations:</p>
+            <div class="test-buttons">
+                <button class="btn btn-primary" onclick="JokeBar.configure({backgroundColor: '#4CAF50'})">Green Theme</button>
+                <button class="btn btn-primary" onclick="JokeBar.configure({backgroundColor: '#2196F3'})">Blue Theme</button>
+                <button class="btn btn-primary" onclick="JokeBar.configure({backgroundColor: '#ff6b6b'})">Reset Theme</button>
+                <button class="btn btn-success" onclick="JokeBar.addJoke('Why did the developer go broke? Because he used up all his cache!')">Add Joke</button>
+            </div>
+        </div>
+
+        <div class="content">
+            <h2>📖 Sample Content</h2>
+            <p>This is some sample content to make the page feel more realistic. The joke bar will only show after you've been on the page for at least 2 seconds (reduced from 5 seconds for testing).</p>
+            
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.</p>
+            
+            <h3>How It Works</h3>
+            <p>The script detects various exit intent signals and shows a humorous joke to keep users engaged. It's designed to be lightweight and non-intrusive.</p>
+        </div>
+
+        <div class="filler-content">
+            <p>📜 Scroll down and then quickly scroll back up to the top!</p>
+        </div>
+
+        <div class="content">
+            <h2>🚀 Production Usage</h2>
+            <p>To use this script on your website, simply include it in your HTML head:</p>
+            <pre style="background: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto;">
+&lt;script src="https://cdn.saqmeda.com/js/exit-intent-jokes.js"&gt;&lt;/script&gt;
+            </pre>
+        </div>
+
+        <div class="filler-content">
+            <p>🎯 More content for testing scroll behavior</p>
+        </div>
+    </div>
+
+    <!-- Debug Panel -->
+    <div id="debug-panel" class="debug-panel">
+        <h4>🐛 Debug Info</h4>
+        <div class="debug-item">Loading...</div>
+    </div>
+
+    <script>
+        // Additional testing utilities
+        document.addEventListener('keydown', function(e) {
+            // Test with Escape key
+            if (e.key === 'Escape') {
+                JokeBar.show();
+            }
+        });
+
+        // Add some console logging for debugging
+        console.log('🃏 Test page loaded. Available commands:');
+        console.log('- JokeBar.show() - Show the joke bar');
+        console.log('- JokeBar.hide() - Hide the joke bar');
+        console.log('- JokeBar.getState() - Get current state');
+        console.log('- JokeBar.configure({...}) - Update configuration');
+        console.log('- JokeBar.addJoke("Your joke here") - Add a new joke');
+    </script>
+</body>
+</html>
